@@ -1,0 +1,104 @@
+{
+    "products": [
+        {
+            "name": "Laboris nostrud est",
+            "model": "XYZ.aba.123",
+            "brand": "Company 2",
+            "price": 10.50,
+            "description": "Velit officia voluptate reprehenderit anim cupidatat in. Consequat ut commodo Lorem qui do velit ullamco nulla. Minim dolore incididunt qui in in dolore fugiat veniam magna nulla. Do tempor proident elit eu dolore. Dolor pariatur sunt consectetur ea proident. Adipisicing proident et amet ipsum pariatur veniam ut laborum qui labore amet tempor exercitation.",
+            "color": "cyan",
+            "id": 20,
+            "special": true
+        },
+        {
+            "name": "Id ullamco id duis",
+            "model": "TYS.trt.555",
+            "brand": "Company 1",
+            "price": 100.00,
+            "description": "Officia amet do quis occaecat sint ipsum magna sit id voluptate officia laboris. Aute qui dolore ullamco fugiat enim excepteur sit Lorem commodo elit non. Voluptate quis aliquip tempor occaecat Lorem culpa aliqua dolor labore excepteur sit pariatur. Reprehenderit nulla ullamco commodo in cillum incididunt magna voluptate consequat exercitation incididunt tempor. Elit occaecat aliqua dolor reprehenderit. Qui aute sunt quis laboris. Voluptate est amet minim labore pariatur officia.",
+            "color": "red",
+            "id": 12,
+            "special": false
+        },
+        {
+            "name": "Exercitation voluptate pariatur",
+            "model": "HCR.koa.7902",
+            "brand": "Company 1",
+            "price": 582.99,
+            "description": "Enim quis anim in qui anim. Aliqua quis anim sint cupidatat sint sit esse id eiusmod. Sint incididunt sunt nisi ullamco tempor fugiat. Sit ullamco duis nulla in non in magna consectetur proident adipisicing.",
+            "color": "red",
+            "id": 4,
+            "special": false
+        },
+        {
+            "name": "Exercitation voluptate pariatur",
+            "model": "UIBD.ffte.5680",
+            "brand": "Company 3",
+            "price": 35.98,
+            "description": "Exercitation voluptate veniam excepteur eu aliquip aliqua do commodo incididunt fugiat. Aliqua veniam quis enim excepteur irure excepteur duis cillum do exercitation dolore amet. Consectetur Lorem irure voluptate dolore occaecat sint officia do eu.",
+            "color": "cyan",
+            "id": 456,
+            "special": false
+        },
+        {
+            "name": "My custom product",
+            "model": "UIBD.abc.446",
+            "brand": "Company 3",
+            "price": 313.13,
+            "description": "Aliqua veniam excepteur elit in labore velit ullamco proident ipsum quis qui incididunt enim adipisicing. Consequat anim aute aute laborum aliquip est et non exercitation occaecat ex aliquip adipisicing ex. Excepteur dolor enim consequat laborum mollit eu elit. Mollit eu aliquip voluptate ipsum excepteur mollit laborum eu occaecat culpa anim.",
+            "color": "black",
+            "id": 15,
+            "special": false
+        },
+        {
+            "name": "Incididunt ex quis",
+            "model": "ABFT.fsv.44690",
+            "brand": "Company 1",
+            "price": 315.01,
+            "description": "Proident adipisicing nulla commodo qui culpa id sunt sit qui sint consequat dolore nostrud. Est officia et laborum culpa. Cupidatat officia esse pariatur nisi dolor eiusmod veniam dolore fugiat ipsum esse ex minim eiusmod. Consequat consectetur amet velit magna.",
+            "color": "black",
+            "id": 98,
+            "special": true
+        },
+        {
+            "name": "Reprehenderit excepteur cillum ex sint nulla",
+            "model": "RTBM.rea.22308",
+            "brand": "Company 2",
+            "price": 208.13,
+            "description": "Est quis reprehenderit commodo est veniam consectetur. Ad reprehenderit laboris cillum aliquip occaecat sint qui adipisicing irure laborum. Enim Lorem tempor mollit incididunt consequat eiusmod magna qui dolor sint et.",
+            "color": "black",
+            "id": 49,
+            "special": true
+        },
+        {
+            "name": "Product test 0001",
+            "model": "RTBM.abc.0001",
+            "brand": "Company 3",
+            "price": 313.13,
+            "description": "Duis eiusmod et elit aute adipisicing consectetur. Nostrud non irure dolor esse culpa voluptate labore. Ipsum ea velit consequat sint nostrud excepteur. Adipisicing consectetur fugiat amet cupidatat nulla labore minim proident esse minim aliqua dolor elit.",
+            "color": "black",
+            "id": 65,
+            "special": false
+        },
+        {
+            "name": "Super prodcut custom",
+            "model": "ABFT.wwq.123",
+            "brand": "Company 1",
+            "price": 313.13,
+            "description": "Aliqua aliquip laborum labore ex culpa proident occaecat enim anim esse ea velit. Exercitation id sint aliqua commodo esse amet magna est. Eu eu tempor qui laboris. Duis dolore deserunt incididunt mollit consectetur in ea. Laboris do consectetur mollit amet eu anim ullamco nisi nulla amet ad ipsum amet labore. Labore anim tempor magna sint.",
+            "color": "cyan",
+            "id": 8,
+            "special": false
+        },
+        {
+            "name": "Polski produkt",
+            "model": "POL.ska.1410",
+            "brand": "Company 2",
+            "price": 101.23,
+            "description": "Nulla cupidatat est reprehenderit mollit aute incididunt est id est. Veniam eu aute aute ex in Lorem aliquip sit commodo quis. Nulla magna nisi commodo ad. Cillum labore mollit exercitation sunt id elit laborum veniam magna tempor. Reprehenderit exercitation amet eiusmod ad do qui deserunt sit. Non aliquip non reprehenderit non deserunt adipisicing Lorem proident.",
+            "color": "black",
+            "id": 0,
+            "special": true
+        }
+    ]
+}
