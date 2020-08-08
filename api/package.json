@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/poncjuszkryncjusz/zaliczenie-js-semestr-2/issues"
   },
-  "homepage": "https://github.com/poncjuszkryncjusz/zaliczenie-js-semestr-2#readme"
+  "homepage": "https://github.com/poncjuszkryncjusz/zaliczenie-js-semestr-2#readme",
+  "devDependencies": {
+    "json-server": "^0.16.1"
+  }
 }
