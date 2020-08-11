@@ -1,4 +1,9 @@
 # zaliczenie-js-semestr-2
+
+uruchomienie API node main.js
+
+npm: build:dev - starter
+
 Przygotuj prototyp porównywarki produktów.
 
 1.wyświetl listę produktów. zdjęcie, nazwa, model, marka, cena oraz przycisk umożliwiający dodanie do porównywarki.

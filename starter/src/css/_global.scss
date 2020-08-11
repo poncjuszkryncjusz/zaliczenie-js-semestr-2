@@ -1,0 +1,112 @@
+html {
+    font-family: $font;
+    font-size: $base-unit;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.wrapper {
+    padding: 0 2 * $base-unit;
+    border: 1px solid $black;
+    max-width: 80 * $base-unit;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 20px;
+}
+
+h1,
+.h1 {
+    font-size: $font-size-h1;
+    margin-bottom: $space;
+}
+
+h2,
+.h2 {
+    font-size: $font-size-h2;
+    margin-bottom: $space;
+}
+
+h3,
+.h3 {
+    font-size: $font-size-h3;
+    margin-bottom: $space;
+}
+
+h4,
+.h4 {
+    font-size: $font-size-h4;
+    margin-bottom: $space;
+}
+
+p {
+    font-size: $font-size-body-1;
+    margin-bottom: 0.5 * $space;
+}
+
+.small {
+    font-size: $font-size-body-2;
+}
+
+p.small {
+    font-size: 0.75 * $base-unit;
+}
+
+.npt {
+    //padding: 20px; // góra, dół, lewo, prawo - 20px
+    //padding: 20px 10px; // góra, dół - 20px;  lewo-prawo - 10px;
+    padding: $btn-padding-top $btn-padding-right $btn-padding-bottom $btn-padding-left; // góra - 30px; lewo, prawo - 10px; dół - 30px;
+    //padding: 20px 10px 30px 5px; // góra - 20px; prawo - 10px; dół - 30px; lewo - 5px;
+    font-size: $base-unit;
+    line-height: 1.5 * $base-unit;
+    min-height: 62px;
+    min-width: 235px;
+    background-color: $white;
+    border: 1px solid $color-2-light;
+    color: $color-2-light;
+    outline: 0;
+
+    &:focus,
+    &:active {
+        outline: 0;
+    }
+}
+
+.npt-error {
+    color: $color-error;
+    border-color: $color-error;
+}
+
+.btn {
+    min-height: 62px;
+    min-width: 192px;
+    padding: $btn-padding-top $btn-padding-right $btn-padding-bottom $btn-padding-left;
+    font-size: $base-unit;
+    line-height: 1.5 * $base-unit;
+    color: $white;
+    background-color: $color-4;
+    border: 1px solid $color-4;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        background-color: $white;
+        color: $color-4;
+    }
+}
+
+%textShadow {
+    text-shadow: 2px 2px 2px red;
+}
+img {
+    max-width: 100%;
+}
+.component{margin-bottom: 2*$space;}

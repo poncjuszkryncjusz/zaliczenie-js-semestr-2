@@ -1,25 +1,67 @@
 <!DOCTYPE html>
 <html lang="pl">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
-		<title>Testowa strona</title>
-		<link rel="stylesheet" href="/css.06291079.css">
-	<script src="/css.06291079.js"></script></head>
-	<body>
-		<div id="app">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
+	<title>Testowa strona</title>
+	<link rel="stylesheet" href="/css.06291079.css">
+<script src="/css.06291079.js"></script></head>
+
+<body>
+	<div id="app">
+		<div id="search">
+			<h2>WYSZUKIWARKA</h2>
+			<hr>
 			<input type="search" v-model="inputSearch">
+
 			<button type="button" @click="searchProducsts">wyszukaj</button>
+			<form>
+				<p><input type="checkbox" @click="myFunction" id="color1"> Kolor 1</p>
+				<p><input type="checkbox" @click="myFunction" id="color2"> Kolor 2</p>
+				<p><input type="checkbox" @click="myFunction" id="color3"> Kolor 3</p>
+			</form>
+			<ul>
+				<li v-for="product in filterProducts">{{product}}</li>
+				<li v-for="product in productPrices">{{product}}</li>
+				<li v-for="product in grossPrices">{{product}}</li>
+			</ul>
+			<select name="cars" id="cars">
+				<option v-for="product in products">{{product.brand}}</option>
+
+			</select>
 		</div>
-		<main id="main" class="main">
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, nemo
-				consectetur, dolorem voluptas, illo dignissimos vitae quia at voluptatem
-				beatae velit maxime placeat mollitia! Non ipsa possimus iure amet
-				molestias!
-			</p>
-		</main>
-		<script src="/js.fcffc47e.js"></script>
-	</body>
+		<div id="listOfProducts">
+			<h2>LISTA PRODUKTÓW</h2>
+			<P>Sortowanie wg. ceny</P>
+			<button type="button" @click="sortDescending" id="sortDescending">MALEJĄCO</button>
+			<button type="button" @click="sortAscending" id="sortAscending">ROSNĄCO</button>
+
+			<hr>
+			<ul>
+				<li v-for="product in products">
+					<img src="https://dummyimage.com/150x150" alt="" class="my_image">
+
+					<h3>{{product.name}}</h3>
+					<h4>{{product.price}} zł netto</h4>
+					<p>Model produktu: {{product.model}}</p>
+					<p>Marka: {{product.brand}}</p>
+					<button type="button" @click="addProductToPriceComparision">Dodaj do porównania</button>
+
+				</li>
+			</ul>
+			<div class="pagination">
+				<a href="#">&laquo;</a>
+				<a href="#">1</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">&raquo;</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="/js.fcffc47e.js"></script>
+</body>
+
 </html>

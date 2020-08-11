@@ -18885,7 +18885,11 @@ new _vue.default({
   data: function data() {
     return {
       products: [],
-      inputSearch: ''
+      inputSearch: '',
+      filterProducts: [],
+      productsToCompare: [],
+      productPrices: [],
+      grossPrices: []
     };
   },
   created: function created() {
@@ -18898,22 +18902,96 @@ new _vue.default({
       fetch("http://localhost:3000/products").then(function (response) {
         return response.json();
       }).then(function (json) {
-        _this.products = json;
-        console.log(json);
+        _this.products = json; // console.log(json)
       });
     },
     searchProducsts: function searchProducsts() {
       var _this2 = this;
 
-      if (this.inputSearch.length > 3) {
-        this.products.filter(function (product) {
-          var matchText = product.name.toLowerCase().includes(_this2.inputSearch.toLowerCase());
+      this.filterProducts = [];
 
-          if (matchText) {
-            console.log(product.name);
+      if (this.inputSearch.length > 2) {
+        this.products.filter(function (product) {
+          var matchTextBrand = product.brand.toLowerCase().includes(_this2.inputSearch.toLowerCase());
+          var matchTextDescription = product.description.toLowerCase().includes(_this2.inputSearch.toLowerCase());
+          var matchTextName = product.name.toLowerCase().includes(_this2.inputSearch.toLowerCase());
+
+          if (matchTextName) {
+            _this2.filterProducts.push(product.name); // console.log(product.name);
+
+          }
+
+          if (matchTextBrand) {
+            _this2.filterProducts.push(product.name); //console.log(product.brand);
+
+          }
+
+          if (matchTextDescription) {
+            _this2.filterProducts.push(product.name); //  console.log(product.description);
+
           }
         });
       }
+    },
+    addProductToPriceComparision: function addProductToPriceComparision() {
+      console.log("działa");
+    },
+    sortAscending: function sortAscending() {
+      var _this3 = this;
+
+      // this.productPrices = [];
+      this.products.filter(function (product) {
+        var prices = parseInt(product.price); //   console.log(this.productPrices )
+
+        if (prices) {
+          var gross = prices * 1.23;
+
+          _this3.grossPrices.push(gross);
+
+          _this3.grossPrices.sort(function (a, b) {
+            return a - b;
+          });
+
+          console.log(_this3.grossPrices);
+
+          _this3.productPrices.push(prices);
+
+          _this3.productPrices.sort(function (a, b) {
+            return a - b;
+          }); // console.log(this.productPrices);
+
+        }
+      });
+    },
+    sortDescending: function sortDescending() {
+      var _this4 = this;
+
+      this.products.filter(function (product) {
+        var prices = parseInt(product.price); //   console.log(this.productPrices )
+
+        if (prices) {
+          var gross = prices * 1.23;
+
+          _this4.grossPrices.push(gross);
+
+          _this4.grossPrices.sort(function (a, b) {
+            return b - a;
+          });
+
+          console.log(_this4.grossPrices);
+
+          _this4.productPrices.push(prices);
+
+          _this4.productPrices.sort(function (a, b) {
+            return b - a;
+          }); // console.log(this.productPrices);
+
+        }
+      });
+    },
+    myFunction: function myFunction() {
+      var check = document.getElementById("color1").checked;
+      console.log(check);
     }
   }
 });
