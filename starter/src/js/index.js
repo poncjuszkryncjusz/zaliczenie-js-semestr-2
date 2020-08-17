@@ -10,15 +10,37 @@ new Vue({
     data() {
         return {
             products: [],
+            productsToDisplay: [],
             inputSearch: '',
             filterProducts: [],
             productsToCompare: [],
             productPrices: [],
             grossPrices: [],
+            filterBrands: 'ALL',
+            checkedColors: [],
         }
     },
     created() {
         this.getProducts();
+    },
+    computed: {
+        allBrands() {
+            const brands = new Set();
+            this.products.forEach(product => {
+                brands.add(product.brand);
+            })
+            return [...brands].sort();
+        },
+
+        allCollors() {
+            const collors = new Set();
+            this.products.forEach(product => {
+                collors.add(product.collor);
+            })
+            return console.log(collors)
+
+
+        }
     },
     methods: {
         getProducts() {
@@ -26,72 +48,48 @@ new Vue({
                 .then(response => response.json())
                 .then(json => {
                     this.products = json
+                    this.productsToDisplay = json
                     // console.log(json)
                 });
         },
         searchProducsts() {
-            this.filterProducts = [];
             if (this.inputSearch.length > 2) {
-                this.products.filter(product => {
-                    const matchTextBrand = product.brand.toLowerCase().includes(this.inputSearch.toLowerCase());
-                    const matchTextDescription = product.description.toLowerCase().includes(this.inputSearch.toLowerCase());
-                    const matchTextName = product.name.toLowerCase().includes(this.inputSearch.toLowerCase());
-                    if (matchTextName) {
-                        this.filterProducts.push(product.name);
-                        // console.log(product.name);
-                    }
-                    if (matchTextBrand) {
-                        this.filterProducts.push(product.name);
-                        //console.log(product.brand);
-
-                    }
-                    if (matchTextDescription) {
-                        this.filterProducts.push(product.name);
-                        //  console.log(product.description);
-                    }
+                this.productsToDisplay = this.products.filter(product => {
+                    return product.brand.toLowerCase().includes(this.inputSearch.toLowerCase()) || product.description.toLowerCase().includes(this.inputSearch.toLowerCase()) || product.name.toLowerCase().includes(this.inputSearch.toLowerCase());
                 })
             }
+            else {
+                this.productsToDisplay = this.products
+            };
+
+
         },
+        selectBrand() {
+            if (this.filterBrands !== "ALL") {
+                this.productsToDisplay = this.products.filter(product => {
+                    return product.brand === this.filterBrands;
+                })
+            } else {
+                this.productsToDisplay = this.products
+            }
+        },
+
+
+
+
+
+
+
         addProductToPriceComparision() {
             console.log("działa")
         },
 
         sortAscending() {
-            // this.productPrices = [];
-            this.products.filter(product => {
-                const prices = parseInt(product.price);
-                //   console.log(this.productPrices )
-                if (prices) {
-                    const gross = prices * 1.23;
-
-                    this.grossPrices.push(gross);
-                    this.grossPrices.sort(function (a, b) { return a - b });
-                    console.log(this.grossPrices);
-
-
-                    this.productPrices.push(prices);
-                    this.productPrices.sort(function (a, b) { return a - b });
-                    // console.log(this.productPrices);
-                }
-            })
+            this.productsToDisplay.sort((a, b) => { return a.price - b.price });
         },
         sortDescending() {
-            this.products.filter(product => {
-                const prices = parseInt(product.price);
-                //   console.log(this.productPrices )
-                if (prices) {
+            this.productsToDisplay.sort((a, b) => { return b.price - a.price });
 
-                    const gross = prices * 1.23;
-
-                    this.grossPrices.push(gross);
-                    this.grossPrices.sort(function (a, b) { return b - a });
-                    console.log(this.grossPrices);
-
-                    this.productPrices.push(prices);
-                    this.productPrices.sort(function (a, b) { return b - a });
-                    // console.log(this.productPrices);
-                }
-            })
         },
         myFunction() {
             const check = document.getElementById("color1").checked;

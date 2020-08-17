@@ -18880,20 +18880,51 @@ var _vue = _interopRequireDefault(require("vue/dist/vue.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 new _vue.default({
   el: '#app',
   data: function data() {
     return {
       products: [],
+      productsToDisplay: [],
       inputSearch: '',
       filterProducts: [],
       productsToCompare: [],
       productPrices: [],
-      grossPrices: []
+      grossPrices: [],
+      filterBrands: 'ALL',
+      checkedColors: []
     };
   },
   created: function created() {
     this.getProducts();
+  },
+  computed: {
+    allBrands: function allBrands() {
+      var brands = new Set();
+      this.products.forEach(function (product) {
+        brands.add(product.brand);
+      });
+      return _toConsumableArray(brands).sort();
+    },
+    allCollors: function allCollors() {
+      var collors = new Set();
+      this.products.forEach(function (product) {
+        collors.add(product.collor);
+      });
+      return console.log(collors);
+    }
   },
   methods: {
     getProducts: function getProducts() {
@@ -18902,91 +18933,45 @@ new _vue.default({
       fetch("http://localhost:3000/products").then(function (response) {
         return response.json();
       }).then(function (json) {
-        _this.products = json; // console.log(json)
+        _this.products = json;
+        _this.productsToDisplay = json; // console.log(json)
       });
     },
     searchProducsts: function searchProducsts() {
       var _this2 = this;
 
-      this.filterProducts = [];
-
       if (this.inputSearch.length > 2) {
-        this.products.filter(function (product) {
-          var matchTextBrand = product.brand.toLowerCase().includes(_this2.inputSearch.toLowerCase());
-          var matchTextDescription = product.description.toLowerCase().includes(_this2.inputSearch.toLowerCase());
-          var matchTextName = product.name.toLowerCase().includes(_this2.inputSearch.toLowerCase());
-
-          if (matchTextName) {
-            _this2.filterProducts.push(product.name); // console.log(product.name);
-
-          }
-
-          if (matchTextBrand) {
-            _this2.filterProducts.push(product.name); //console.log(product.brand);
-
-          }
-
-          if (matchTextDescription) {
-            _this2.filterProducts.push(product.name); //  console.log(product.description);
-
-          }
+        this.productsToDisplay = this.products.filter(function (product) {
+          return product.brand.toLowerCase().includes(_this2.inputSearch.toLowerCase()) || product.description.toLowerCase().includes(_this2.inputSearch.toLowerCase()) || product.name.toLowerCase().includes(_this2.inputSearch.toLowerCase());
         });
+      } else {
+        this.productsToDisplay = this.products;
+      }
+
+      ;
+    },
+    selectBrand: function selectBrand() {
+      var _this3 = this;
+
+      if (this.filterBrands !== "ALL") {
+        this.productsToDisplay = this.products.filter(function (product) {
+          return product.brand === _this3.filterBrands;
+        });
+      } else {
+        this.productsToDisplay = this.products;
       }
     },
     addProductToPriceComparision: function addProductToPriceComparision() {
       console.log("działa");
     },
     sortAscending: function sortAscending() {
-      var _this3 = this;
-
-      // this.productPrices = [];
-      this.products.filter(function (product) {
-        var prices = parseInt(product.price); //   console.log(this.productPrices )
-
-        if (prices) {
-          var gross = prices * 1.23;
-
-          _this3.grossPrices.push(gross);
-
-          _this3.grossPrices.sort(function (a, b) {
-            return a - b;
-          });
-
-          console.log(_this3.grossPrices);
-
-          _this3.productPrices.push(prices);
-
-          _this3.productPrices.sort(function (a, b) {
-            return a - b;
-          }); // console.log(this.productPrices);
-
-        }
+      this.productsToDisplay.sort(function (a, b) {
+        return a.price - b.price;
       });
     },
     sortDescending: function sortDescending() {
-      var _this4 = this;
-
-      this.products.filter(function (product) {
-        var prices = parseInt(product.price); //   console.log(this.productPrices )
-
-        if (prices) {
-          var gross = prices * 1.23;
-
-          _this4.grossPrices.push(gross);
-
-          _this4.grossPrices.sort(function (a, b) {
-            return b - a;
-          });
-
-          console.log(_this4.grossPrices);
-
-          _this4.productPrices.push(prices);
-
-          _this4.productPrices.sort(function (a, b) {
-            return b - a;
-          }); // console.log(this.productPrices);
-
-        }
+      this.productsToDisplay.sort(function (a, b) {
+        return b.price - a.price;
       });
     },
     myFunction: function myFunction() {
@@ -19023,7 +19008,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59354" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54538" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

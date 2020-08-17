@@ -18,21 +18,27 @@
 			<input type="search" v-model="inputSearch">
 
 			<button type="button" @click="searchProducsts">wyszukaj</button>
-			<form >
-				<p><input type="checkbox" @click="myFunction" id="color1"> Kolor 1</p>
-				<p><input type="checkbox" @click="myFunction" id="color2"> Kolor 2</p>
-				<p><input type="checkbox" @click="myFunction" id="color3"> Kolor 3</p>
-			</form>
-			<ul>
-				<li v-for="product in filterProducts">{{product}}</li>
-				<li v-for="product in productPrices">{{product}}</li>
-				<li v-for="product in grossPrices">{{product}}</li>
-			</ul>
-			<select name="cars" id="cars">
-				<option v-for="product in products">{{product.brand}}</option>
+			
+			
+			
+			<!--<input type="checkbox"  :value="color" v-model="checkedColors">
+			<label for="jack"></label>
+			<input type="checkbox" :value="color" v-model="checkedColors">
+			<label for="john">{{color}}</label>
+			<input type="checkbox" :value="color" v-model="checkedColors">
+			<label for="mike">{{color}}</label>-->
 
+		
+			<select name="brands" id="brands" v-model="filterBrands" @change="selectBrand">
+				<option value="ALL">All</option>
+				<option v-for="brand in allBrands" :value="brand">{{brand}}</option>
 			</select>
 		</div>
+		
+		
+		
+		
+		
 		<div id="listOfProducts">
 			<h2>LISTA PRODUKTÓW</h2>
 			<P>Sortowanie wg. ceny</P>
@@ -41,12 +47,13 @@
 
 			<hr>
 			<ul>
-				<li v-for="product in products">
+				<li v-for="product in productsToDisplay">
 					<img src="https://dummyimage.com/150x150" alt="" class="my_image" />
 
 					<h3>{{product.name}}</h3>
 					<h4>{{product.price}} zł netto</h4>
 					<p>Model produktu: {{product.model}}</p>
+
 					<p>Marka: {{product.brand}}</p>
 					<button type="button" @click="addProductToPriceComparision">Dodaj do porównania</button>
 
