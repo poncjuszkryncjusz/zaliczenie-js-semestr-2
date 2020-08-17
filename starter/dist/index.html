@@ -17,9 +17,9 @@
 			<input type="search" v-model="inputSearch">
 
 			<button type="button" @click="searchProducsts">wyszukaj</button>
-			
-			
-			
+
+
+
 			<!--<input type="checkbox"  :value="color" v-model="checkedColors">
 			<label for="jack"></label>
 			<input type="checkbox" :value="color" v-model="checkedColors">
@@ -27,17 +27,26 @@
 			<input type="checkbox" :value="color" v-model="checkedColors">
 			<label for="mike">{{color}}</label>-->
 
-		
+
+
+
 			<select name="brands" id="brands" v-model="filterBrands" @change="selectBrand">
 				<option value="ALL">All</option>
 				<option v-for="brand in allBrands" :value="brand">{{brand}}</option>
 			</select>
+
+
+			<div id="priceFilter">
+				Cena od : <input type="number" v-model="priceMinimum"> do
+				<input type="number" v-model="priceMaximum">
+				<button type="button" @click="filtrPrices">Filtruj</button>
+			</div>
 		</div>
-		
-		
-		
-		
-		
+
+
+
+
+
 		<div id="listOfProducts">
 			<h2>LISTA PRODUKTÓW</h2>
 			<P>Sortowanie wg. ceny</P>

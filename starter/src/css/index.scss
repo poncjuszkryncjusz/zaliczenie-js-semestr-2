@@ -1,8 +1,11 @@
 //normalize import from node_modules
-@import "../../node_modules/normalize.css/normalize";
+//@import "../../node_modules/normalize.css/normalize";
 
 //@import "./global";
 //@import "./variables";
+
+h2{
+background-color: red($color: #c75f5f);}
 
 
 

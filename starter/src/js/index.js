@@ -18,6 +18,8 @@ new Vue({
             grossPrices: [],
             filterBrands: 'ALL',
             checkedColors: [],
+            priceMinimum: '',
+            priceMaximum: '',
         }
     },
     created() {
@@ -73,6 +75,16 @@ new Vue({
                 this.productsToDisplay = this.products
             }
         },
+        filtrPrices() {
+			this.productsToDisplay = this.products.filter(product => {
+				if (product.price > parseInt(this.priceMinimum) && product.price < parseInt(this.priceMaximum)) {
+					return true;
+				} else {
+					return false;
+					
+				}
+			})
+		},
 
 
 

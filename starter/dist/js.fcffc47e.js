@@ -18904,7 +18904,9 @@ new _vue.default({
       productPrices: [],
       grossPrices: [],
       filterBrands: 'ALL',
-      checkedColors: []
+      checkedColors: [],
+      priceMinimum: '',
+      priceMaximum: ''
     };
   },
   created: function created() {
@@ -18960,6 +18962,17 @@ new _vue.default({
       } else {
         this.productsToDisplay = this.products;
       }
+    },
+    filtrPrices: function filtrPrices() {
+      var _this4 = this;
+
+      this.productsToDisplay = this.products.filter(function (product) {
+        if (product.price > parseInt(_this4.priceMinimum) && product.price < parseInt(_this4.priceMaximum)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
     addProductToPriceComparision: function addProductToPriceComparision() {
       console.log("działa");
