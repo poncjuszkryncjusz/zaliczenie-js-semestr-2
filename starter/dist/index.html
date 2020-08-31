@@ -11,68 +11,96 @@
 
 <body>
 	<div id="app">
-		<div id="search">
-			<h2>WYSZUKIWARKA</h2>
+		<div class="wrapper">
+			<h2 class="xxx">WYSZUKIWARKA</h2>
 			<hr>
-			<input type="search" v-model="inputSearch">
-
-			<button type="button" @click="searchProducsts">wyszukaj</button>
-
-
-
-			<!--<input type="checkbox"  :value="color" v-model="checkedColors">
-			<label for="jack"></label>
-			<input type="checkbox" :value="color" v-model="checkedColors">
-			<label for="john">{{color}}</label>
-			<input type="checkbox" :value="color" v-model="checkedColors">
-			<label for="mike">{{color}}</label>-->
-
-
-
-
-			<select name="brands" id="brands" v-model="filterBrands" @change="selectBrand">
-				<option value="ALL">All</option>
-				<option v-for="brand in allBrands" :value="brand">{{brand}}</option>
-			</select>
-
-
-			<div id="priceFilter">
-				Cena od : <input type="number" v-model="priceMinimum"> do
-				<input type="number" v-model="priceMaximum">
-				<button type="button" @click="filtrPrices">Filtruj</button>
+			<div id="search">
+				<div class="seeeee"> <input class="searchInput" placeholder="Wyszukaj po nazwie" type="search" v-model="inputSearch">
+					<button class="baton" type="button" @click="searchProducsts">wyszukaj</button></div>
 			</div>
-		</div>
 
+			<div class="filters">
+				<div class="filtrPrice">
+					<div class="brands"><select name="brands" id="brands" v-model="filterBrands" @change="selectBrand">
+							<option value="ALL">All</option>
+							<option v-for="brand in allBrands" :value="brand">{{brand}}</option>
+						</select></div>
+					<div class="priceFilter">
+						Cena od : <input type="number" v-model="priceMinimum"> do
+						<input type="number" v-model="priceMaximum">
+						<button type="button" @click="filtrPrices">Filtruj</button>
+					</div>
+				</div>
+				<div class="conteinerChecked">
+					<div class="checkboxy">
+						<input type="radio" id="ALL" value="ALL" v-model="checkedColors" @change="filterColors">
+						<label for="ALL">ALL</label>
+					</div>
+					<div v-for="color in allColors">
+						<input type="radio" :id="color" :value="color" v-model="checkedColors" @change="filterColors">
+						<label :for="color">{{color}}</label>
+					</div>
+				</div>
 
-
-
-
-		<div id="listOfProducts">
-			<h2>LISTA PRODUKTÓW</h2>
-			<P>Sortowanie wg. ceny</P>
-			<button type="button" @click="sortDescending" id="sortDescending">MALEJĄCO</button>
-			<button type="button" @click="sortAscending" id="sortAscending">ROSNĄCO</button>
+			</div>
+			<div class="sortProducts">
+				<h2 class="xxx">LISTA PRODUKTÓW</h2>
+				<div class="sort">
+					<p class="price">Sortowanie wg. ceny</p>
+					<button class="left" type="button" @click="sortAscending">Rosnąco</button>
+					<button class="right" type="button" @click="sortDescending">Malejąco</button>
+				</div>
+			</div>
 
 			<hr>
-			<ul>
-				<li v-for="product in productsToDisplay">
-					<img src="https://dummyimage.com/150x150" alt="" class="my_image">
 
-					<h3>{{product.name}}</h3>
-					<h4>{{product.price}} zł netto</h4>
-					<p>Model produktu: {{product.model}}</p>
+			<div v-for="product in productsPerPage">
+				<div v-bind:class="{changeStyleForSpecial: product.special}">
 
-					<p>Marka: {{product.brand}}</p>
-					<button type="button" @click="addProductToPriceComparision">Dodaj do porównania</button>
+					<div class="products">
+						<img src="https://dummyimage.com/150x150" alt="" class="my_image">
 
-				</li>
-			</ul>
-			<div class="pagination">
-				<a href="#">&laquo;</a>
-				<a href="#">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">&raquo;</a>
+						<div class="productWithoutPrice">
+							<h3>{{product.name}}</h3>
+							<p>Model produktu: {{product.model}}</p>
+							<p>Marka: {{product.brand}}</p>
+							<p>Kolor: {{product.color}}</p>
+						</div>
+
+
+
+						<div class="priceee"><button class="price" type="button" @click="addProductToPriceComparision(product)" :disabled="productsToCompare.length >= 3">Dodaj do porównania</button>
+							<p class="price">{{product.price}} zł brutto
+							</p><p class="price"> {{withoutTax(product.price)}} zł netto </p>
+						</div>
+
+
+					</div>
+
+				</div>
+				<hr>
+			</div>
+			<div>
+				<button v-for="page in paginationPages" @click="() => changePage(page)">{{page +1}}</button>
+			</div>
+
+			<h2 class="xxx">PORÓWNYWARKA</h2>
+			<hr>
+
+			<div class="productsToCompare">
+				<div class="productsToCompareStyle" v-for="productToCompare in productsToCompare">
+					<div v-bind:class="{changeStyleForSpecial: productToCompare.special}">
+						<img src="https://dummyimage.com/150x150" alt="" class="my_image">
+						<button @click="delProductCompare(productToCompare)">Usuń z porównywarki</button>
+						<h3>{{productToCompare.name}}</h3>
+						<p> Model: {{productToCompare.model}}</p>
+						<p> Marka:{{productToCompare.brand}}</p>
+						<p>{{productToCompare.price}} zł brutto</p>
+						<p>{{withoutTax(productToCompare.price)}} zł netto</p>
+						<p> Opis: {{productToCompare.description}}</p>
+						<p>Kolor: {{productToCompare.color}}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -2,9 +2,6 @@ import "@babel/polyfill";
 import Vue from 'vue/dist/vue.js';
 
 
-
-
-
 new Vue({
     el: '#app',
     data() {
@@ -17,9 +14,11 @@ new Vue({
             productPrices: [],
             grossPrices: [],
             filterBrands: 'ALL',
-            checkedColors: [],
+            checkedColors: 'ALL',
             priceMinimum: '',
             priceMaximum: '',
+            page: 0,
+            specialProduct: true,
         }
     },
     created() {
@@ -28,21 +27,31 @@ new Vue({
     computed: {
         allBrands() {
             const brands = new Set();
+
             this.products.forEach(product => {
                 brands.add(product.brand);
             })
             return [...brands].sort();
         },
 
-        allCollors() {
-            const collors = new Set();
+        allColors() {
+            const colors = new Set();
             this.products.forEach(product => {
-                collors.add(product.collor);
+                colors.add(product.color);
             })
-            return console.log(collors)
+            return colors
 
+        },
 
-        }
+        paginationPages() {
+            const numberOfPages = Math.ceil(this.productsToDisplay.length / 4);
+            return Array.from({ length: numberOfPages }, (v, k) => k);
+        },
+
+        productsPerPage() {
+            const startIndex = this.page * 4;
+            return this.productsToDisplay.slice(startIndex, startIndex + 4)
+        },
     },
     methods: {
         getProducts() {
@@ -54,6 +63,7 @@ new Vue({
                     // console.log(json)
                 });
         },
+
         searchProducsts() {
             if (this.inputSearch.length > 2) {
                 this.productsToDisplay = this.products.filter(product => {
@@ -66,6 +76,7 @@ new Vue({
 
 
         },
+
         selectBrand() {
             if (this.filterBrands !== "ALL") {
                 this.productsToDisplay = this.products.filter(product => {
@@ -76,24 +87,49 @@ new Vue({
             }
         },
         filtrPrices() {
-			this.productsToDisplay = this.products.filter(product => {
-				if (product.price > parseInt(this.priceMinimum) && product.price < parseInt(this.priceMaximum)) {
-					return true;
-				} else {
-					return false;
-					
-				}
-			})
-		},
+            this.productsToDisplay = this.products.filter(product => {
+                if (product.price > parseInt(this.priceMinimum) && product.price < parseInt(this.priceMaximum)) {
+                    return true;
+                } else {
+                    return false;
 
+                }
+            })
+        },
 
+        filterColors() {
+            if (this.checkedColors !== "ALL") {
+                this.productsToDisplay = this.products.filter(product => {
+                    return product.color === this.checkedColors;
+                })
 
+            } else {
+                this.productsToDisplay = this.products
+            }
+        },
 
+        changePage(page) {
+            this.page = page;
+        },
 
+        withoutTax(brutto) {
+            const vat = 0.23;
+            let valueVatPrice = (brutto * vat);
+            console.log(valueVatPrice);
 
+            let nettoValue = brutto - valueVatPrice;
 
-        addProductToPriceComparision() {
-            console.log("działa")
+            return nettoValue.toFixed(2)
+        },
+
+        addProductToPriceComparision(product) {
+            this.productsToCompare.push(product);
+
+            console.log(this.productsToCompare)
+        },
+
+        delProductCompare(productToCompare) {
+            this.productsToCompare.splice(0, 1);
         },
 
         sortAscending() {
@@ -101,12 +137,6 @@ new Vue({
         },
         sortDescending() {
             this.productsToDisplay.sort((a, b) => { return b.price - a.price });
-
         },
-        myFunction() {
-            const check = document.getElementById("color1").checked;
-            console.log(check)
-        }
-
     },
 })

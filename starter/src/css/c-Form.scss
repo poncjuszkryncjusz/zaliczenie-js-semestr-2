@@ -1,0 +1,54 @@
+label {
+    display: block;
+    margin-bottom: 2 * $base-unit;
+}
+.msg-error {
+    display: none;
+    color: $color-error;
+}
+
+    input,
+    select {
+        border-color: $color-error;
+        background-color: rgba($color-error, 0.2);
+    }
+
+
+input {
+    &[type="checkbox"],
+    &[type="radio"] {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        & + label {
+            padding-left: $space;
+            position: relative;
+            &::before {
+                font-size: 1.5em;
+                content: "\2610";
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+    &[type="radio"] {
+        &:checked {
+            & + label {
+                &::before {
+                    content: "\2BBE";
+                }
+            }
+        }
+    }
+    &[type="checkbox"] {
+        &:checked {
+            & + label {
+                &::before {
+                    content: "\2713";
+                }
+            }
+        }
+    }
+}

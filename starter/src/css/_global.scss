@@ -10,11 +10,13 @@ html {
 a {
     text-decoration: none;
 }
+li {    text-decoration: none;
+}
 
 .wrapper {
     padding: 0 2 * $base-unit;
     border: 1px solid $black;
-    max-width: 80 * $base-unit;
+    max-width: 60 * $base-unit;
     margin: 0 auto;
     position: relative;
     margin-top: 20px;
@@ -88,9 +90,9 @@ p.small {
     padding: $btn-padding-top $btn-padding-right $btn-padding-bottom $btn-padding-left;
     font-size: $base-unit;
     line-height: 1.5 * $base-unit;
-    color: $white;
-    background-color: $color-4;
-    border: 1px solid $color-4;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
     cursor: pointer;
     display: inline-block;
     text-align: center;

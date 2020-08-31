@@ -18904,9 +18904,11 @@ new _vue.default({
       productPrices: [],
       grossPrices: [],
       filterBrands: 'ALL',
-      checkedColors: [],
+      checkedColors: 'ALL',
       priceMinimum: '',
-      priceMaximum: ''
+      priceMaximum: '',
+      page: 0,
+      specialProduct: true
     };
   },
   created: function created() {
@@ -18920,12 +18922,24 @@ new _vue.default({
       });
       return _toConsumableArray(brands).sort();
     },
-    allCollors: function allCollors() {
-      var collors = new Set();
+    allColors: function allColors() {
+      var colors = new Set();
       this.products.forEach(function (product) {
-        collors.add(product.collor);
+        colors.add(product.color);
       });
-      return console.log(collors);
+      return colors;
+    },
+    paginationPages: function paginationPages() {
+      var numberOfPages = Math.ceil(this.productsToDisplay.length / 4);
+      return Array.from({
+        length: numberOfPages
+      }, function (v, k) {
+        return k;
+      });
+    },
+    productsPerPage: function productsPerPage() {
+      var startIndex = this.page * 4;
+      return this.productsToDisplay.slice(startIndex, startIndex + 4);
     }
   },
   methods: {
@@ -18974,8 +18988,33 @@ new _vue.default({
         }
       });
     },
-    addProductToPriceComparision: function addProductToPriceComparision() {
-      console.log("działa");
+    filterColors: function filterColors() {
+      var _this5 = this;
+
+      if (this.checkedColors !== "ALL") {
+        this.productsToDisplay = this.products.filter(function (product) {
+          return product.color === _this5.checkedColors;
+        });
+      } else {
+        this.productsToDisplay = this.products;
+      }
+    },
+    changePage: function changePage(page) {
+      this.page = page;
+    },
+    withoutTax: function withoutTax(brutto) {
+      var vat = 0.23;
+      var valueVatPrice = brutto * vat;
+      console.log(valueVatPrice);
+      var nettoValue = brutto - valueVatPrice;
+      return nettoValue.toFixed(2);
+    },
+    addProductToPriceComparision: function addProductToPriceComparision(product) {
+      this.productsToCompare.push(product);
+      console.log(this.productsToCompare);
+    },
+    delProductCompare: function delProductCompare(productToCompare) {
+      this.productsToCompare.splice(0, 1);
     },
     sortAscending: function sortAscending() {
       this.productsToDisplay.sort(function (a, b) {
@@ -18986,10 +19025,6 @@ new _vue.default({
       this.productsToDisplay.sort(function (a, b) {
         return b.price - a.price;
       });
-    },
-    myFunction: function myFunction() {
-      var check = document.getElementById("color1").checked;
-      console.log(check);
     }
   }
 });
@@ -19021,7 +19056,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54538" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51406" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

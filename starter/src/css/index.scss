@@ -1,11 +1,95 @@
 //normalize import from node_modules
-//@import "../../node_modules/normalize.css/normalize";
+@import "../../node_modules/normalize.css/normalize";
+@import "reset.scss";
 
-//@import "./global";
-//@import "./variables";
+@import "./variables";
+@import "./global";
 
-h2{
-background-color: red($color: #c75f5f);}
+.xxx {
+   margin-top: 30px;
+  display: inline-block;
+  width: 50%;
+}
+.search {
+    max-width: 100%;
+    position: absolute;
+}
+.seeeee {
+    position: relative;
+    max-width: 100%;
+}
+.baton {
+    float: right;
+}
+.searchInput {
+    width: 90%;
+    border-radius: 25px;
+}
 
+.sort {
+   // border: 2px solid black;
+   // float: right;
+   width: 25%;
+float: right;}
+.priceee {
+   // border: 2px solid black;
+    float: right;
+}
+.price {
+    position: static;
+}
+p.price{margin-top: 15px;
+text-align: center;}
+
+.filtrPrice {
+    position: absolute;
+   // background: lightgray;
+}
+
+.priceFilter {
+    float: right;
+    padding-top: 40px;
+    margin-left: 2*$space;
+}
+.brands {
+    float: left;
+    padding-top: 40px;
+}
+.left{
+    width: 49%;
+}
+.right{
+    width: 49%;
+}
+
+//.products{height: 200px;}
+
+.productWithoutPrice{ position: relative;
+  // background: orange;
+   display: inline-block;
+   width: 50%;
+   margin-left: 100px;
+   // width: 300px;
+    //height: 150px;
+    //right: -175px;
+   // top: -150px;
+}
+.conteinerChecked {
+    position: relative;
+   // background: orange;
+    width: 100px;
+    height: 100px;
+    right: -755px;
+    top: 25px;
+    margin-left: $space;
+
+}
+.changeStyleForSpecial {
+    background-color: blue;
+   color: white;
+   button{
+       background-color: yellow;
+   }
+}
 
 
